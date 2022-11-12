@@ -28,9 +28,9 @@
       }
     },
     methods: {
-      show(){
-        console.log(this.swiperdata)
-      }
+      // swiperImageLoad(){
+      //   this.$emit('swiperImageLoad')
+      // }
     }
   }
 </script>

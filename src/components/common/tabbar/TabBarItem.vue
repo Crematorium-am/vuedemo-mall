@@ -55,7 +55,7 @@
     width: 24px;
     height: 24px;
     margin-top: 3px;
-    margin-bottom: 2px;
+    margin-bottom: 4px;
     vertical-align: middle;
   }
 </style>

@@ -1,36 +1,34 @@
 <template>
   <div class="home-floor">
-    <div class="floor-item" v-for="(item, index) in catitems" :key="index">
-      <img :src="item.image_src" alt="">
-    </div>
+    <floor-item v-for="(item, index) in floordata" :key="index" :flooritem="item">     
+    </floor-item>
   </div>
 </template>
 
 <script>
+  import FloorItem from './FloorItem.vue'
+
   export default {
-    name: 'Homefloor',
+    name: 'HomeFloor',
+    data(){
+      return {
+      }
+    },
+    components: {
+      FloorItem
+    },
     props: {
-      catitems: {
+      floordata: {
         type: Array,
         default(){
           return []
         }
       }
+    },
+    methods: {
     }
   }
 </script>
 
 <style>
-  .home-floor{
-    display: flex;
-    padding: 10px 0px 20px 0px;
-  }
-
-  .floor-item{
-    flex: 1;
-  }
-
-  .floor-item img{
-    width: 100%
-  }
 </style>

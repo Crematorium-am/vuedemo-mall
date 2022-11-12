@@ -6,7 +6,7 @@
 
 <script>
   export default {
-    name: 'Catr',
+    name: 'goods_detail',
     
   }
 </script>

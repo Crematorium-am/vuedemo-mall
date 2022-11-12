@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <keep-alive exclude="goods_list">   <!-- keep-alive中可以是include或者exclude对组件进行选择性缓存或者不缓存 -->
+      <router-view></router-view>  
+    </keep-alive>
     <main-tabbar></main-tabbar>
   </div>
 </template>

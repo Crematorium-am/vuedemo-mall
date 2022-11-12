@@ -1,4 +1,4 @@
-import { request } from "../request";
+import { request } from "./request"
 
 export function getswiperdata(){
   return request({
@@ -9,5 +9,11 @@ export function getswiperdata(){
 export function getcatitems(){
   return request({
     url: '/home/catitems'
+  })
+}
+
+export function getFloordata(){
+  return request({
+    url: '/home/floordata'
   })
 }
