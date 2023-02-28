@@ -71,10 +71,10 @@
       },
     },
     activated(){
-      this.$refs.scroll.scrollTo(0, this.scrollY, 0)
+      this.$refs.scroll.scrollTo(0, this.scrollY, 0)    //当组件再次处于活跃时跳转到上次离开前的位置
     },
-    deactivated(){
-      this.scrollY = this.$refs.scroll.getScrollY()
+    deactivated(){  
+      this.scrollY = this.$refs.scroll.getScrollY()    //记录离开页面时的位置
     }
   }
 </script>

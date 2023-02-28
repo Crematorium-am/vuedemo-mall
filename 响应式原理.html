@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    const obj = {
+      name: '111',
+      age: 18
+    }
+    Object.keys(obj).forEach(key => {
+      let value = obj[key]
+      Object.defineProperty(obj, key, {
+        get(){
+          console.log('读取属性值')
+          return value
+        },
+        set(newValue){
+          console.log('修改属性值')
+          value = newValue
+          dep.notify(value)
+        }
+      })
+    })
+
+    //发布者
+    class Dep{
+      //定义一个构造器
+      constructor(){
+        //定义一个空数组，用来存放每一个订阅者
+        this.subs = []
+      }
+      //添加订阅者方法
+      addSubs(watch){
+        //将每个订阅者添加进数组
+        this.subs.push(watch)
+      }
+      //通知订阅者发生改变
+      notify(value){
+        //当数据发生变化的时候通知数据的订阅者们进行更新
+        this.subs.forEach(item => {
+          item.update(value)
+        })
+      }
+    }
+
+    //订阅者
+    class Watcher{
+      //定义一个构造器，对数据进行订阅
+      constructor(name){
+        this.name = name
+      }
+      //更新方法，当数据发生改变，通过update方法进行数据更新
+      update(value){
+        //进行更新操作
+        console.log('发生更新')
+        this.name = value
+      }
+    }
+
+    //模拟创建发布者
+    let dep = new Dep()
+    //模拟创建订阅者
+    let w1 = new Watcher()
+    //将订阅者添加进数组
+    dep.addSubs(w1)
+  </script>
+</body>
+</html>

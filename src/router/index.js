@@ -3,9 +3,9 @@ import VueRouter from 'vue-router'
 
 const Home = () => import('@/views/home/Home.vue')
 const Category = () => import('@/views/category/Category.vue')
-const Cart = () => import('@/views/cart/Catr.vue')
+const Cart = () => import('@/views/cart/Cart.vue')
 const Profile = () => import('@/views/profile/Profile.vue')
-const GoodsList = () => import('@/views/category/childComps/Goods_list.vue')
+const GoodsList = () => import('@/views/goods_list/goods_list.vue')
 const GoodsDetail = () => import('@/views/goods_detail/goods_detail.vue')
 
 
@@ -19,32 +19,50 @@ const routes = [
   {
     path: '/home',
     name: 'Home',
-    component: Home
+    component: Home,
+    meta: {
+      closeTabbar: true
+    }
   },
   {
     path: '/category',
     name: 'Category',
-    component: Category
+    component: Category,
+    meta: {
+      closeTabbar: true
+    }
   },
   {
     path: '/cart',
     name: 'Cart',
-    component: Cart
+    component: Cart,
+    meta: {
+      closeTabbar: true
+    }
   },
   {
     path: '/profile',
     name: 'Profile',
-    component: Profile
+    component: Profile,
+    meta: {
+      closeTabbar: true
+    }
   },
   {
     path: '/goods_list/:cid', //当路由携带返回参数时，需要以:xx格式编写代码
     name: 'GoodsList',
-    component: GoodsList
+    component: GoodsList,
+    meta: {
+      closeTabbar: false
+    }
   },
   {
-    path: '/goods_detail',
+    path: '/goods_detail/:gid',
     name: 'GoodsDetail',
-    component: GoodsDetail
+    component: GoodsDetail,
+    meta: {
+      closeTabbar: false
+    }
   }
 ]
 

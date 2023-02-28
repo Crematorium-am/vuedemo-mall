@@ -74,7 +74,7 @@
       data() {
         setTimeout(() => {
           this.bscroll.refresh()
-        }, 20)
+        }, 50)
       }
     }
   }

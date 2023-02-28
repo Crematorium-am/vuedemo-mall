@@ -7,13 +7,13 @@
       <Scroll class="cates_name" ref="scroll1" :data="cate_name_list">
         <cates-menu :cate_name_list="cate_name_list" @chooseCate="chooseCate"></cates-menu>
       </Scroll>
-      <Scroll class="cates_content" :probeType="3" :pullUpLoad="true" ref="scroll2" @scroll="contentScroll">
-        <cate-content>
+      <Scroll class="cates_content" :probeType="3" :pullUpLoad="true" ref="scroll" @scroll="contentScroll">
+        <div class="cate_items">
           <cate-item v-for="(item, index) in cate_child_list" :key="index" :child_list="cate_child_list[index]"></cate-item>
-        </cate-content>
+        </div>
       </Scroll>
     </div>
-    <back-top @click.native="backtopclick" v-show="isshow"></back-top>  <!-- 当需要监听组件的原生事件的，需要加.native -->
+    <back-top @click.native="backTop" v-show="isshow"></back-top>  <!-- 当需要监听组件的原生事件的，需要加.native -->
   </div>
 </template>
 
@@ -22,11 +22,11 @@
   import Scroll from '@/components/common/scroll/Scroll'
   import BackTop from '@/components/content/Backtop/BackTop'
   import CatesMenu from './childComps/CatesMenu'
-  import CateContent from './childComps/CateContent'
   import CateItem from './childComps/CateItem'
 
   import { getcategories } from '@/networks/category'
   import { debounce } from '@/common/utils'
+  import { BackTopMixin } from '@/common/mixin'
 
   export default {
     name: 'category',
@@ -39,23 +39,18 @@
         cate_child_list: []
       }
     },
+    mixins: [ BackTopMixin ],
     components: {
       NavBar,
       Scroll,
       BackTop,
       CatesMenu,
-      CateContent,
       CateItem
     },
     created(){
       this.getcategories()
     },
-    methods: {
-      //放回顶层
-      backtopclick(){
-        this.$refs.scroll2.scrollTo(0, 0)
-      },
-      
+    methods: {    
       //封装网络请求
       getcategories(){
         getcategories().then(res => {
@@ -64,21 +59,15 @@
           this.cate_child_list = this.cates[0].children
         })
       },
-
-      //滚动事件
-      contentScroll(position){       
-        this.isshow = -(position.y) > 1000
-      },
-
       //侧边栏点击切换
       chooseCate(i){
         this.cate_child_list = this.cates[i].children
-        this.backtopclick()
+        this.backTop()
       },
 
     },
     mounted(){    
-      const res = debounce(this.$refs.scroll2.refresh, 100)
+      const res = debounce(this.$refs.scroll.refresh, 100)
 
       this.$bus.$on('imageLoad', () => {
         res()
@@ -88,7 +77,7 @@
       
     },
     activated(){
-      this.$refs.scroll2.refresh()
+      this.$refs.scroll.refresh()
     },
   }
 </script>
@@ -111,5 +100,8 @@
     height: calc(100vh - 93px);
     overflow: hidden;
     flex: 3;
+  }
+  .cate_items{
+    padding-top: 10px;
   }
 </style>

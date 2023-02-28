@@ -2,7 +2,7 @@
   <div class="cate_item">
     <div class="cate_title">/ {{child_list.cat_name}} /</div>
     <ul>
-      <li v-for="(item, index) in this.child_list.children" :key="index" @click="toRoute(item.cat_id)">
+      <li v-for="(item, index) in this.child_list.children" :key="index" @click="toGoodsList(item.cat_id)">
         <img :src="item.cat_icon" alt="" @load="imageLoad">
         <p>{{item.cat_name}}</p>
       </li>
@@ -30,7 +30,7 @@
         this.$bus.$emit('imageLoad')
       },
       //路由跳转并携带参数
-      toRoute(cid){
+      toGoodsList(cid){
         this.$router.push('/goods_list/' + cid)
       }
     }
